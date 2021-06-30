@@ -2,45 +2,86 @@
 <head>
     <link rel="stylesheet" href="main.css" />
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js" ></script>
-    <script type="text/javascript" src="mapper/mapper.js" />
     <script type="text/javascript">
-        $(document).ready(function() {
-            $('#image_map area').each(function() {
-                var coords = $(this).attr('coords').split(',')
+        function handleMap(left,top)
+        {   
+            notavailableMessage="#notavailable"
+            position=$("#map").position();            
+            $(notavailableMessage).css("left",position.left + parseInt(left));
+            $(notavailableMessage).css("top",position.top + parseInt(top));
+            $(notavailableMessage).toggle();
+            if ( $(notavailableMessage).css('display') == 'none' )
+            {
+                $("#avatar").attr("src","/images/avatarnamaster.png")
+            }
+            else
+            {
+                $("#avatar").attr("src","/images/avatarthinking.png")
+            }
+        }
+
+        $(function() {
+            $('#image_map div').each(function() {
+                var coords = $('area',$(this)).attr('coords').split(',')
                 $(this).mouseover(function() {
-                    handleMap(coords[0],0);
+                    handleMap(coords[0],coords[1]);
                 })
-               
+               $(this).mouseout(function()
+               {
+                    handleMap(coords[0],coords[1]);
+               })
             })
 
         })
-        function handleMap(left,top)
-        {
-            alert("it's here")
-            $("#notavailable").css("left",left);
-            $("#notavailable").toggle();
-        }
+
     </script>
 </head>
 <body>
     <div class="row">
-        <div class="column left">testing</div>
-        <div class="column right"><img src="/images/certifications.png" class="mapper" border=0 usemap="#image_map"></div>
+        <div class="column left">
+            <img src="/images/avatarnamaster.png" border=0 class="vertical-center" id="avatar" />
+        </div>
+        <div class="column right"><img src="/images/certifications.png" border=0 usemap="#image_map" id="map"></div>
       </div>
-      <map name="image_map" id="image_map">
-        <area alt="Fundamentals" title="AI Fundamentals" href="#" coords="84,90,198,195" shape="rect" >
-        <area alt="Fundamentals" class="noborder icolor00ff00" title="Azure Fundamentals" href="#" coords="422,90,517,195" shape="rect">        
-        <area alt="Fundamentals" title="Data Fundamentals" href="#" coords="745,90,859,195" shape="rect" >
-        <area alt="Data Engineer" title="Data Engineer" href="#" coords="695,250,779,380" shape="rect" >
-        <area alt="Data Scientist" title="Data Scientist" href="#" coords="820,250,959,380" shape="rect" >
-        <area alt="Database Administrator" title="Database Administrator" href="#" coords="525,255,650,365" shape="rect">
-        <area alt="Azure Administrator" title="Azure Administrator" href="#" coords="315,255,422,355" shape="rect">
-        <area alt="Security Engineer" title="Security Engineer" href="#" coords="197,255,296,370" shape="rect" >
-        <area alt="Azure Developer" title="Azure Developer" href="#" coords="422,255,517,355" shape="rect" >
-        <area alt="AI Engineer" title="AI Engineer" href="#" coords="89,255,194,375" shape="rect" >
-        <area alt="Solutions Architect" title="Solutions Architect" href="#" coords="230,415,362,520" shape="rect" >
-        <area alt="DevOps Engineer" title="DevOps Engineer" href="#" coords="400,415,500,520" shape="rect" >
-      </map>
-    <p id="notavailable" class="rcorners1" style="visibility: hidden;position:absolute">Not Available Yet, come back soon!</p>      
+    <map name="image_map" id="image_map">
+        <div style="position:absolute">
+            <area alt="Fundamentals" title="AI Fundamentals" href="#" coords="84,90,198,195" shape="rect">
+        </div>
+        <div style="position:absolute">
+            <area alt="Fundamentals" title="Azure Fundamentals" href="#" coords="422,90,517,195" shape="rect">
+        </div>
+        <div style="position:absolute">
+            <area alt="Fundamentals" title="Data Fundamentals" href="#" coords="745,90,859,195" shape="rect">
+        </div>
+        <div style="position:absolute">
+            <area alt="Data Engineer" title="Data Engineer" href="#" coords="695,250,779,380" shape="rect">
+        </div>
+        <div style="position:absolute">
+            <area alt="Data Scientist" title="Data Scientist" href="#" coords="820,250,959,380" shape="rect">
+        </div>
+        <div style="position:absolute">
+            <area alt="Database Administrator" title="Database Administrator" href="#" coords="525,255,650,365"
+                shape="rect">
+        </div>
+        <div style="position:absolute">
+            <area alt="Azure Administrator" title="Azure Administrator" href="#" coords="315,255,422,355" shape="rect">
+        </div>
+        <div style="position:absolute">
+            <area alt="Security Engineer" title="Security Engineer" href="#" coords="197,255,296,370" shape="rect">
+        </div>
+        <div style="position:absolute">
+            <area alt="Azure Developer" title="Azure Developer" href="#" coords="422,255,517,355" shape="rect">
+        </div>
+        <div style="position:absolute">
+            <area alt="AI Engineer" title="AI Engineer" href="#" coords="89,255,194,375" shape="rect">
+        </div>
+        <div style="position:absolute">
+            <area alt="Solutions Architect" title="Solutions Architect" href="#" coords="250,415,362,520" shape="rect">
+        </div>
+        <div style="position:absolute">
+            <area alt="DevOps Engineer" title="DevOps Engineer" href="#" coords="400,415,505,520" shape="rect">
+        </div>
+    </map>
+    <p id="notavailable" class="rcorners1" style="display:none;position:absolute;font-size:x-small;font-weight:bolder">Not Available Yet, come back soon!</p>      
 </body>
 </html>

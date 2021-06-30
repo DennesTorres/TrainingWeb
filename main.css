@@ -6,9 +6,9 @@
   .rcorners1 {
     border-radius: 25px;
     background: #f06f6f; 
-    padding:10px;
-    width: 200px;
-    height: 50px;  
+    padding:5px;
+    width: 100px;
+    height: 30px;  
     margin: top 0px;
     text-align: center;
   }
@@ -20,6 +20,15 @@
   
   .left {
     width: 25%;
+    margin-top:auto;
+  }
+
+  .vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
   }
   
   .right {
